@@ -1,0 +1,5 @@
+name = Devel debug bar
+description = Displays a debug bar in the browser with information from php.
+package = Development
+core = 7.x
+php = 5.3

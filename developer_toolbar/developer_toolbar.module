@@ -1,0 +1,72 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Devel debug bar module.
+ */
+
+/**
+ * Implements hook_boot().
+ */
+function developer_toolbar_boot() {
+  require __DIR__ . '/vendor/autoload.php';
+
+  // Bootstrap debug bar as soon as possible.
+  \DeveloperToolbar\DeveloperToolbar::getInstance();
+
+  @include_once DRUPAL_ROOT . '/includes/database/log.inc';
+  Database::startLog('developer_toolbar');;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function developer_toolbar_theme() {
+  $items['developer_toolbar'] = array(
+    'render element' => 'element',
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_page_build().
+ */
+function developer_toolbar_page_build(&$page) {
+  $environment = variable_get('environment');
+
+  // Don't show developer toolbar on staging or production.
+  if (in_array($environment, array('production', 'staging'))) {
+    return;
+  }
+
+  //Get the DeveloperToolbar instance.
+  $renderer = \DeveloperToolbar\DeveloperToolbar::getInstance()->getJavascriptRenderer();
+  $renderer->setBasePath(drupal_get_path('module', 'developer_toolbar') . '/' . $renderer->getBaseUrl());
+
+  // Load assets.
+  list($css_files, $js_files) = $renderer->getAssets();
+  foreach ($css_files as $css_file) {
+    drupal_add_css($css_file);
+  }
+  // PHP DebugBar ships with own jQuery.
+  // So we load it later to avoid conflicts.
+  $options['weight'] = 100;
+  foreach ($js_files as $js_file) {
+    drupal_add_js($js_file, $options);
+  }
+
+  drupal_add_css(drupal_get_path('module', 'developer_toolbar') . '/css/developer_toolbar.css');
+  drupal_add_js(drupal_get_path('module', 'developer_toolbar') . '/js/developer_toolbar.js', $options);
+
+  // TODO: Use post_render instead.
+  $page['page_bottom']['debug_bar']['#theme'] = 'developer_toolbar';
+}
+
+/**
+ * Render developer toolbar.
+ */
+function theme_developer_toolbar() {
+  return \DeveloperToolbar\DeveloperToolbar::getInstance()
+    ->getJavascriptRenderer()
+    ->render();
+}

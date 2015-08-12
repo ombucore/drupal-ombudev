@@ -1,0 +1,27 @@
+div.phpdebugbar-header {
+  background: url(../images/druplicon-mini.png) no-repeat scroll 5px 3px #EFEFEF
+}
+
+.phpdebugbar-body {
+
+}
+
+.debug-bar-markup-widget {
+  margin: 15px;
+  background: #FFF;
+}
+
+
+dl.phpdebugbar-widgets-kvlist dt {
+  width: 250px;
+  margin-right: 10px;
+  white-space:nowrap;
+}
+dl.phpdebugbar-widgets-kvlist dd {
+  content: " ";
+  min-height: 10px;
+}
+dl.phpdebugbar-widgets-kvlist dd:before {
+  content: "_";
+  color: transparent;
+}

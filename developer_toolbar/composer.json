@@ -1,0 +1,10 @@
+{
+  "name": "drupal/developer_toolbar",
+  "description": "Developer toolbar",
+  "autoload": {
+      "psr-0": { "DeveloperToolbar": "lib/" }
+  },
+  "require": {
+    "maximebf/debugbar": "1.*"
+  }
+}
