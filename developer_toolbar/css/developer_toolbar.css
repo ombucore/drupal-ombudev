@@ -1,21 +1,15 @@
-div.phpdebugbar-header {
-  background: url(../images/druplicon-mini.png) no-repeat scroll 5px 3px #EFEFEF
+div.phpdebugbar-header,
+a.phpdebugbar-restore-btn {
+  background: url(../images/ombu.png) no-repeat scroll 5px 5px #efefef;
 }
-
-.phpdebugbar-body {
-
-}
-
 .debug-bar-markup-widget {
   margin: 15px;
-  background: #FFF;
+  background: #ffffff;
 }
-
-
 dl.phpdebugbar-widgets-kvlist dt {
   width: 250px;
   margin-right: 10px;
-  white-space:nowrap;
+  white-space: nowrap;
 }
 dl.phpdebugbar-widgets-kvlist dd {
   content: " ";
@@ -24,4 +18,93 @@ dl.phpdebugbar-widgets-kvlist dd {
 dl.phpdebugbar-widgets-kvlist dd:before {
   content: "_";
   color: transparent;
+}
+div.phpdebugbar-widgets-database {
+  font-size: 11px;
+}
+div.phpdebugbar-widgets-database span.phpdebugbar-widgets-database,
+div.phpdebugbar-widgets-database span.phpdebugbar-widgets-duration {
+  float: right;
+  margin-left: 8px;
+  color: #888888;
+}
+div.phpdebugbar-widgets-database .phpdebugbar-widgets-status {
+  font-family: monospace;
+  padding: 6px 6px;
+  border-bottom: 1px solid #dddddd;
+  font-weight: bold;
+  color: #555555;
+  background: #fafafa;
+}
+div.phpdebugbar-widgets-database li.phpdebugbar-widgets-list-item.phpdebugbar-widgets-error {
+  color: red;
+}
+div.phpdebugbar-widgets-database div.phpdebugbar-widgets-status span.phpdebugbar-widgets-database,
+div.phpdebugbar-widgets-database div.phpdebugbar-widgets-status span.phpdebugbar-widgets-duration {
+  color: #555555;
+}
+div.phpdebugbar-widgets-database span.phpdebugbar-widgets-database:before {
+  font-family: FontAwesome;
+  margin-right: 4px;
+  font-size: 12px;
+  content: "\f1c0";
+}
+div.phpdebugbar-widgets-database span.phpdebugbar-widgets-duration:before {
+  font-family: FontAwesome;
+  margin-right: 4px;
+  font-size: 12px;
+  content: "\f017";
+}
+div.phpdebugbar-widgets-database table.phpdebugbar-widgets-params {
+  display: none;
+  width: 70%;
+  margin: 10px;
+  border: 1px solid #dddddd;
+  font-family: monospace;
+  border-collapse: collapse;
+}
+div.phpdebugbar-widgets-database table.phpdebugbar-widgets-params td {
+  border: 1px solid #dddddd;
+  text-align: center;
+}
+div.phpdebugbar-widgets-database table.phpdebugbar-widgets-params .phpdebugbar-widgets-name {
+  width: 20%;
+  font-weight: bold;
+}
+div.phpdebugbar-widgets-database li.phpdebugbar-widgets-list-item span.phpdebugbar-widgets-error {
+  display: block;
+  font-weight: bold;
+}
+div.phpdebugbar-widgets-database li.phpdebugbar-widgets-list-item.phpdebugbar-widgets-sql-duplicate {
+  background-color: #ffe0e0;
+}
+div.phpdebugbar-widgets-database li.phpdebugbar-widgets-list-item.phpdebugbar-widgets-sql-duplicate:hover {
+  background-color: #ffffcc;
+}
+div.phpdebugbar-widgets-database div.phpdebugbar-widgets-toolbar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #ffffff;
+  z-index: 1;
+}
+div.phpdebugbar-widgets-database div.phpdebugbar-widgets-toolbar a.phpdebugbar-widgets-filter {
+  float: right;
+  font-size: 12px;
+  padding: 2px 4px;
+  background: #7cacd5;
+  margin: 0 2px;
+  border-radius: 4px;
+  color: #ffffff;
+  text-decoration: none;
+}
+div.phpdebugbar-widgets-database div.phpdebugbar-widgets-toolbar a.phpdebugbar-widgets-filter.phpdebugbar-widgets-excluded {
+  background: #eeeeee;
+  color: #888888;
+}
+code.phpdebugbar-widgets-sql {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }

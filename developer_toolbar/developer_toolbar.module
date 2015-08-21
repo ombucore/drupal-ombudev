@@ -6,6 +6,17 @@
  */
 
 /**
+ * Implements hook_module_implements_alter().
+ */
+function developer_toolbar_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'boot') {
+    $group = $implementations['developer_toolbar'];
+    unset($implementations['developer_toolbar']);
+    $implementations['developer_toolbar'] = $group;
+  }
+}
+
+/**
  * Implements hook_boot().
  */
 function developer_toolbar_boot() {
@@ -16,16 +27,8 @@ function developer_toolbar_boot() {
 
   @include_once DRUPAL_ROOT . '/includes/database/log.inc';
   Database::startLog('developer_toolbar');;
-}
 
-/**
- * Implements hook_theme().
- */
-function developer_toolbar_theme() {
-  $items['developer_toolbar'] = array(
-    'render element' => 'element',
-  );
-  return $items;
+  drupal_register_shutdown_function('developer_toolbar_shutdown');
 }
 
 /**
@@ -57,16 +60,50 @@ function developer_toolbar_page_build(&$page) {
 
   drupal_add_css(drupal_get_path('module', 'developer_toolbar') . '/css/developer_toolbar.css');
   drupal_add_js(drupal_get_path('module', 'developer_toolbar') . '/js/developer_toolbar.js', $options);
+}
 
-  // TODO: Use post_render instead.
-  $page['page_bottom']['debug_bar']['#theme'] = 'developer_toolbar';
+
+/**
+ * Shutdown function, ensures developer toolbar always gets run.
+ */
+function developer_toolbar_shutdown() {
+  if (!developer_toolbar_silent()) {
+    print \DeveloperToolbar\DeveloperToolbar::getInstance()
+      ->getJavascriptRenderer()
+      ->render();
+  }
 }
 
 /**
- * Render developer toolbar.
+ * Implements hook_ajax_render_alter().
+ *
+ * Disables our footer stuff based on ajax response.
+ *
+ * AJAX render reponses sometimes are sent as text/html. We have to catch them
+ * here and disable our footer stuff.
  */
-function theme_developer_toolbar() {
-  return \DeveloperToolbar\DeveloperToolbar::getInstance()
-    ->getJavascriptRenderer()
-    ->render();
+function developer_toolbar_ajax_render_alter() {
+  $GLOBALS['developer_toolbar_shutdown'] = FALSE;
+}
+
+/**
+ * Checks whether developer toolbar may be active.
+ * 
+ * Borrowed from devel_silent().
+ */
+function developer_toolbar_silent() {
+  // isset($_GET['q']) is needed when calling the front page. q is not set.
+  // Don't interfere with private files/images.
+  return
+    function_exists('drupal_is_cli') && drupal_is_cli() ||
+    (isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'ApacheBench') !== FALSE) ||
+    !empty($_REQUEST['XDEBUG_PROFILE']) ||
+    isset($GLOBALS['developer_toolbar_shutdown']) ||
+    strstr($_SERVER['PHP_SELF'], 'update.php') ||
+    (isset($_GET['q']) && (
+      in_array($_GET['q'], array('admin/content/node-settings/rebuild')) ||
+      substr($_GET['q'], 0, strlen('system/files')) == 'system/files' ||
+      substr($_GET['q'], 0, strlen('batch')) == 'batch' ||
+      substr($_GET['q'], 0, strlen('file/ajax')) == 'file/ajax')
+    );
 }
