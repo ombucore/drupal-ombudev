@@ -21,7 +21,7 @@ class GitCollector extends DataCollector implements Renderable {
     static $branch;
     if (!$branch) {
       $file = '../.git/HEAD';
-      if (is_readable($file) && $data = file_get_contents($file)) {
+      if (is_readable($file) && ($data = file_get_contents($file)) && strpos('refs/heads/', $data) !== FALSE) {
         list(, $branch) = explode('refs/heads/', $data);
       }
     }
