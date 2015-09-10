@@ -100,7 +100,7 @@ function developer_toolbar_silent() {
   // isset($_GET['q']) is needed when calling the front page. q is not set.
   // Don't interfere with private files/images.
   return
-    path_is_admin(current_path()) ||
+    (function_exists('path_is_admin') && path_is_admin(current_path())) ||
     function_exists('drupal_is_cli') && drupal_is_cli() ||
     (isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'ApacheBench') !== FALSE) ||
     !empty($_REQUEST['XDEBUG_PROFILE']) ||
