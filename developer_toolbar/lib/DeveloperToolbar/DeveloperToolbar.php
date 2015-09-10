@@ -40,10 +40,10 @@ class DeveloperToolbar extends DebugBar{
 
     // Custom database toolbar collectors.
     $this->addCollector(new DatabaseCollector());
-    $gitCollector = new GitCollector();
-    if ($gitCollector->getBranch()) {
-      $this->addCollector($gitCollector);
-    }
+    // $gitCollector = new GitCollector();
+    // if ($gitCollector->getBranch()) {
+    //   $this->addCollector($gitCollector);
+    // }
     $this->addCollector(new EnvironmentIndicator());
 
     self::$instance = $this;
