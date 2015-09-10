@@ -18,10 +18,10 @@ class GitCollector extends DataCollector implements Renderable {
    * Extract the branch we currently have checked out.
    */
   public function getBranch() {
-    static $branch;
+    static $branch = FALSE;
     if (!$branch) {
       $file = '../.git/HEAD';
-      if (is_readable($file) && ($data = file_get_contents($file)) && strpos('refs/heads/', $data) !== FALSE) {
+      if (is_readable($file) && ($data = file_get_contents($file)) && strpos($data, 'refs/heads/') !== FALSE) {
         list(, $branch) = explode('refs/heads/', $data);
       }
     }
