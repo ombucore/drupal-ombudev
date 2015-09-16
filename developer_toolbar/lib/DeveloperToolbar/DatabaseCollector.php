@@ -24,17 +24,17 @@ class DatabaseCollector extends DataCollector implements Renderable {
     $queries = \Database::getLog('developer_toolbar', 'default');
     foreach ($queries as $query) {
       $total_duration += $query['time'];
-      $statements[] = array(
-        'sql' => $this->formatWithParameters ? $this->formatSql($query) : $query['query'],
-        'params' => (object) $query['args'],
-        'duration' => $this->formatDuration($query['time']),
-        'caller' => $query['caller'],
-        'connection' => $query['target'],
-      );
+      // $statements[] = array(
+      //   'sql' => $this->formatWithParameters ? $this->formatSql($query) : $query['query'],
+      //   'params' => (object) $query['args'],
+      //   'duration' => $this->formatDuration($query['time']),
+      //   'caller' => $query['caller'],
+      //   'connection' => $query['target'],
+      // );
     }
 
     return array(
-      'total_statements' => count($statements),
+      'total_statements' => count($queries),
       'statements' => $statements,
       'total_duration' => $this->formatDuration($total_duration),
     );
