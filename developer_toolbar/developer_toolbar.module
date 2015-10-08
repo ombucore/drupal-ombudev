@@ -104,6 +104,7 @@ function developer_toolbar_silent() {
     function_exists('drupal_is_cli') && drupal_is_cli() ||
     (isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'ApacheBench') !== FALSE) ||
     !empty($_REQUEST['XDEBUG_PROFILE']) ||
+    (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') ||
     isset($GLOBALS['developer_toolbar_shutdown']) ||
     strstr($_SERVER['PHP_SELF'], 'update.php') ||
     (isset($_GET['q']) && (
