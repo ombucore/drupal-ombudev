@@ -111,6 +111,7 @@ function developer_toolbar_silent() {
       in_array($_GET['q'], array('admin/content/node-settings/rebuild')) ||
       substr($_GET['q'], 0, strlen('system/files')) == 'system/files' ||
       substr($_GET['q'], 0, strlen('batch')) == 'batch' ||
+      substr($_GET['q'], 0, strlen('oembed')) == 'oembed' ||
       substr($_GET['q'], 0, strlen('file/ajax')) == 'file/ajax')
     );
 }
