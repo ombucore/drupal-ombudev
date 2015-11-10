@@ -58,7 +58,10 @@ function developer_toolbar_page_build(&$page) {
   }
   // PHP DebugBar ships with own jQuery.
   // So we load it later to avoid conflicts.
-  $options['weight'] = 100;
+  $options = array(
+    'scope' => 'footer',
+    'weight' => 900,
+  );
   foreach ($js_files as $js_file) {
     drupal_add_js($js_file, $options);
   }
