@@ -20,15 +20,17 @@ function developer_toolbar_module_implements_alter(&$implementations, $hook) {
  * Implements hook_boot().
  */
 function developer_toolbar_boot() {
-  require __DIR__ . '/vendor/autoload.php';
+  if (!developer_toolbar_silent()) {
+    require __DIR__ . '/vendor/autoload.php';
 
-  // Bootstrap debug bar as soon as possible.
-  \DeveloperToolbar\DeveloperToolbar::getInstance();
+    // Bootstrap debug bar as soon as possible.
+    \DeveloperToolbar\DeveloperToolbar::getInstance();
 
-  @include_once DRUPAL_ROOT . '/includes/database/log.inc';
-  Database::startLog('developer_toolbar');;
+    @include_once DRUPAL_ROOT . '/includes/database/log.inc';
+    Database::startLog('developer_toolbar');;
 
-  drupal_register_shutdown_function('developer_toolbar_shutdown');
+    drupal_register_shutdown_function('developer_toolbar_shutdown');
+  }
 }
 
 /**
