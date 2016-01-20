@@ -16,7 +16,7 @@ class BreakpointIndicator extends DataCollector implements Renderable {
    */
   public function collect() {
     return array(
-      'breakpoint_str' => '',
+      'breakpoint_str' => 'No breakpoint identified',
     );
   }
 
@@ -33,7 +33,7 @@ class BreakpointIndicator extends DataCollector implements Renderable {
   public function getWidgets() {
     return array(
       'breakpoint' => array(
-        'icon' => 'mobile',
+        'icon' => 'arrows',
         'tooltip' => 'Breakpoint',
         'map' => 'breakpoint.breakpoint_str',
         'default' => 'null'
