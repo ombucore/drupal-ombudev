@@ -32,6 +32,7 @@ class DeveloperToolbar extends DebugBar{
     }
 
     // PHP debug bar collectors.
+    $this->addCollector(new BreakpointIndicator());
     $this->addCollector(new PhpInfoCollector());
     // $this->addCollector(new MessagesCollector());
     $this->addCollector(new RequestDataCollector());
