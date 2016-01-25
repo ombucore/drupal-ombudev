@@ -34,6 +34,15 @@ function developer_toolbar_boot() {
 }
 
 /**
+ * Implements hook_preprocess_html().
+ */
+function developer_toolbar_preprocess_html(&$variables) {
+  if (!developer_toolbar_silent()) {
+    $variables['classes_array'][] = 'phpdebugbar-active';
+  }
+}
+
+/**
  * Implements hook_page_build().
  */
 function developer_toolbar_page_build(&$page) {
