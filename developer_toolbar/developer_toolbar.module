@@ -127,6 +127,7 @@ function developer_toolbar_silent() {
       substr($_GET['q'], 0, strlen('system/files')) == 'system/files' ||
       substr($_GET['q'], 0, strlen('batch')) == 'batch' ||
       substr($_GET['q'], 0, strlen('oembed')) == 'oembed' ||
+      substr($_GET['q'], 0, strlen('sitemap.xml')) == 'sitemap.xml' ||
       substr($_GET['q'], 0, strlen('file/ajax')) == 'file/ajax')
     );
 }
