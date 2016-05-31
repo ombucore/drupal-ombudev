@@ -1,0 +1,13 @@
+[1mdiff --git a/developer_toolbar/vendor/maximebf/debugbar/src/DebugBar/JavascriptRenderer.php b/developer_toolbar/vendor/maximebf/debugbar/src/DebugBar/JavascriptRenderer.php[m
+[1mindex d4ac750..31a6ffc 100644[m
+[1m--- a/developer_toolbar/vendor/maximebf/debugbar/src/DebugBar/JavascriptRenderer.php[m
+[1m+++ b/developer_toolbar/vendor/maximebf/debugbar/src/DebugBar/JavascriptRenderer.php[m
+[36m@@ -42,7 +42,7 @@[m [mclass JavascriptRenderer[m
+     );[m
+ [m
+     protected $jsVendors = array([m
+[31m-        'jquery' => 'vendor/jquery/dist/jquery.min.js',[m
+[32m+[m[32m        //'jquery' => 'vendor/jquery/dist/jquery.min.js',[m
+         'highlightjs' => 'vendor/highlightjs/highlight.pack.js'[m
+     );[m
+ [m

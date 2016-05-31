@@ -42,7 +42,7 @@ class JavascriptRenderer
     );
 
     protected $jsVendors = array(
-        'jquery' => 'vendor/jquery/dist/jquery.min.js',
+        //'jquery' => 'vendor/jquery/dist/jquery.min.js',
         'highlightjs' => 'vendor/highlightjs/highlight.pack.js'
     );
 
