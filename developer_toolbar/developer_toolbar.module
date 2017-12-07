@@ -128,6 +128,7 @@ function developer_toolbar_silent() {
       substr($_GET['q'], 0, strlen('batch')) == 'batch' ||
       substr($_GET['q'], 0, strlen('oembed')) == 'oembed' ||
       substr($_GET['q'], 0, strlen('sitemap.xml')) == 'sitemap.xml' ||
-      substr($_GET['q'], 0, strlen('file/ajax')) == 'file/ajax')
+      substr($_GET['q'], 0, strlen('file/ajax')) == 'file/ajax' ||
+      substr($_GET['q'], strlen('.ics')*-1, strlen('.ics')) == '.ics')
     );
 }
